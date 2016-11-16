@@ -1,6 +1,7 @@
 ﻿using MySql.Data.Entity;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -13,13 +14,22 @@ namespace EF6CodeFirstMySQL
     {
         public ExampleDBContext() : base("name=MyContext")
         {
+            Configuration.ProxyCreationEnabled = true;
+            Configuration.LazyLoadingEnabled = true;
+        }
 
+        public ExampleDBContext(DbConnection existingConnection, bool contextOwnsConnection)
+      : base(existingConnection, contextOwnsConnection)
+        {
+            Configuration.ProxyCreationEnabled = true;
+            Configuration.LazyLoadingEnabled = true;
+            Configuration.AutoDetectChangesEnabled = true;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //modelBuilder.Entity<User>().MapToStoredProcedures();
+            modelBuilder.Entity<User>();
         }
 
         public DbSet<User> Users { get; set; }
