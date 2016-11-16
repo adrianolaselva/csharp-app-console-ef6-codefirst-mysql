@@ -10,6 +10,7 @@ namespace EF6CodeFirstMySQL.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            //AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(EF6CodeFirstMySQL.ExampleDBContext context)

@@ -14,8 +14,9 @@ namespace EF6CodeFirstMySQL
     {
         public ExampleDBContext() : base("name=MyContext")
         {
-            Configuration.ProxyCreationEnabled = true;
-            Configuration.LazyLoadingEnabled = true;
+            //Configuration.ProxyCreationEnabled = true;
+            //Configuration.LazyLoadingEnabled = true;
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ExampleDBContext, Migrations.Configuration>());
         }
 
         public ExampleDBContext(DbConnection existingConnection, bool contextOwnsConnection)
@@ -29,7 +30,7 @@ namespace EF6CodeFirstMySQL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<User>();
+            //modelBuilder.Entity<User>();
         }
 
         public DbSet<User> Users { get; set; }
